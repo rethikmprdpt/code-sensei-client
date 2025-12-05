@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:8000';
+const API_URL = "http://localhost:8000";
 
 export const analyzeCode = async (code) => {
   try {
@@ -9,5 +9,14 @@ export const analyzeCode = async (code) => {
   } catch (error) {
     console.error("API Error:", error);
     throw error;
+  }
+};
+
+export const sendFeedback = async (data) => {
+  // data = { function_name, code, explanation, rating }
+  try {
+    await axios.post(`${API_URL}/feedback`, data);
+  } catch (error) {
+    console.error("Feedback Error:", error);
   }
 };
