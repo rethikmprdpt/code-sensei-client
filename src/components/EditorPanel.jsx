@@ -1,8 +1,7 @@
-import React from 'react';
-import Editor from '@monaco-editor/react';
+import React from "react";
+import Editor from "@monaco-editor/react";
 
-const EditorPanel = ({ code, setCode }) => {
-  
+const EditorPanel = ({ code, setCode, language }) => {
   const handleEditorChange = (value) => {
     setCode(value);
   };
@@ -20,6 +19,13 @@ const EditorPanel = ({ code, setCode }) => {
           theme="vs-dark"
           value={code}
           onChange={handleEditorChange}
+          language={
+            language === "csharp"
+              ? "csharp"
+              : language === "cpp"
+              ? "cpp"
+              : language
+          }
           options={{
             minimap: { enabled: false },
             fontSize: 14,

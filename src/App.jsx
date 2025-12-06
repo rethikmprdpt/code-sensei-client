@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import EditorPanel from './components/EditorPanel';
-import SenseiPanel from './components/SenseiPanel';
-import { analyzeCode } from './services/api';
-import { Play, Code2 } from 'lucide-react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
+import EditorPanel from "./components/EditorPanel";
+import SenseiPanel from "./components/SenseiPanel";
+import { analyzeCode } from "./services/api";
+import { Play, Code2 } from "lucide-react";
 
 // Default bad code to demo the O(n^2) detection
 const DEFAULT_CODE = `def find_duplicate(nums):
@@ -16,6 +17,7 @@ const DEFAULT_CODE = `def find_duplicate(nums):
 
 function App() {
   const [code, setCode] = useState(DEFAULT_CODE);
+  const [language, setLanguage] = useState("python");
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,14 +26,14 @@ function App() {
     setLoading(true);
     setError(null);
     setAnalysis(null);
-    
+
     try {
       // 1. Send code to FastAPI
-      const result = await analyzeCode(code);
+      const result = await analyzeCode(code, language);
       // 2. Store result
       setAnalysis(result);
     } catch (err) {
-      setError("Failed to connect to backend. Is uvicorn running?");
+      setError("Sorry, we couldn't analyze the code. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -46,7 +48,12 @@ function App() {
             <Code2 className="w-5 h-5 text-blue-500" />
           </div>
           <div>
-            <h1 className="font-bold text-lg tracking-tight">Code Sensei <span className="text-xs font-normal text-gray-500 ml-1">v0.1 POC</span></h1>
+            <h1 className="font-bold text-lg tracking-tight">
+              Code Sensei{" "}
+              <span className="text-xs font-normal text-gray-500 ml-1">
+                v0.1 POC
+              </span>
+            </h1>
           </div>
         </div>
 
@@ -54,14 +61,31 @@ function App() {
           onClick={handleAnalyze}
           disabled={loading}
           className={`flex items-center gap-2 px-5 py-2 rounded-lg font-medium text-sm transition-all transform active:scale-95
-            ${loading 
-              ? 'bg-gray-800 text-gray-500 cursor-not-allowed' 
-              : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
+            ${
+              loading
+                ? "bg-gray-800 text-gray-500 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20"
             }`}
         >
-          <Play className={`w-4 h-4 fill-current ${loading ? 'hidden' : ''}`} />
-          {loading ? 'Analyzing...' : 'Run Analysis'}
+          <Play className={`w-4 h-4 fill-current ${loading ? "hidden" : ""}`} />
+          {loading ? "Analyzing..." : "Run Analysis"}
         </button>
+        <div className="flex items-center gap-3 mr-4">
+          <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">
+            Language:
+          </span>
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="bg-gray-800 text-white text-xs border border-gray-700 rounded px-2 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer"
+          >
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="cpp">C++</option>
+            <option value="java">Java</option>
+            <option value="csharp">C#</option>
+          </select>
+        </div>
       </header>
 
       {/* Main Split View */}
