@@ -1,6 +1,10 @@
 @import "tailwindcss";
+body {
+  margin: 0;
+  background-color: #111827;
+}
 
-/* Custom Scrollbar for a polished feel */
+/* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
 }
@@ -13,4 +17,33 @@
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #4b5563;
+}
+
+/* --- MONACO EDITOR HIGHLIGHTS --- */
+
+/* 1. The Active Hover Highlight (Blue Block) */
+.monaco-highlight-active {
+  background-color: rgba(
+    59,
+    130,
+    246,
+    0.15
+  ) !important; /* Blue-500 with opacity */
+  box-shadow: inset 2px 0 0 0 #3b82f6 !important; /* Thin blue line on the left */
+}
+
+/* 2. Critical Issue Marker (Red Gutter) */
+.squiggly-error-gutter {
+  background-color: rgba(239, 68, 68, 0.8) !important; /* Red-500 */
+  width: 5px !important;
+  margin-left: 3px;
+  border-radius: 2px;
+}
+
+/* 3. Warning Issue Marker (Yellow Gutter) */
+.squiggly-warning-gutter {
+  background-color: rgba(234, 179, 8, 0.8) !important; /* Yellow-500 */
+  width: 5px !important;
+  margin-left: 3px;
+  border-radius: 2px;
 }

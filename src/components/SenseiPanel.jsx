@@ -52,7 +52,7 @@ const FeedbackButtons = ({ item, explanation }) => {
   );
 };
 
-const SenseiPanel = ({ analysis, loading, error }) => {
+const SenseiPanel = ({ analysis, loading, error, onHoverBlock }) => {
   // 1. Loading State
   if (loading) {
     return (
@@ -111,6 +111,8 @@ const SenseiPanel = ({ analysis, loading, error }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               key={index}
+              onMouseEnter={() => onHoverBlock(item.meta)}
+              onMouseLeave={() => onHoverBlock(null)}
               className="mb-8 bg-gray-800/50 rounded-xl border border-gray-700 overflow-hidden"
             >
               {/* Card Header */}
