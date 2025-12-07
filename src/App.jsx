@@ -38,7 +38,7 @@ function App() {
         setError(err.response.data.detail);
       } else {
         // Only show this if we truly can't reach the server
-        setError("Failed to connect to backend. Is uvicorn running?");
+        setError("Failed to connect to backend. Is FastAPI running?");
       }
     } finally {
       setLoading(false);
