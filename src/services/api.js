@@ -20,3 +20,18 @@ export const sendFeedback = async (data) => {
     console.error("Feedback Error:", error);
   }
 };
+
+export const sendChat = async (message, code_context, language, history) => {
+  try {
+    const response = await axios.post(`${API_URL}/chat`, {
+      message,
+      code_context,
+      language,
+      history,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Chat API Error:", error);
+    throw error;
+  }
+};

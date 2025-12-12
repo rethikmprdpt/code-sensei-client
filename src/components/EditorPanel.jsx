@@ -73,7 +73,15 @@ const EditorPanel = ({ code, setCode, language, analysis, activeBlock }) => {
       <div className="bg-gray-900 text-gray-400 px-4 py-2 text-xs font-mono border-b border-gray-700 flex items-center justify-between">
         <span>
           📄 source_code.
-          {language === "python" ? "py" : language === "cpp" ? "cpp" : "txt"}
+          {language === "python"
+            ? "py"
+            : language === "cpp"
+            ? "cpp"
+            : language === "javascript"
+            ? "js"
+            : language === "java"
+            ? "java"
+            : "cs"}
         </span>
         <span className="text-gray-600 capitalize">{language} Mode</span>
       </div>

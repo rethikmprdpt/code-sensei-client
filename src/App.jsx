@@ -112,6 +112,7 @@ function App() {
             loading={loading}
             error={error}
             onHoverBlock={setActiveBlock}
+            language={language}
           />
         </div>
       </main>
